@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { BasicTextFields } from '../utils/BasicTextFields';
 import { BasicDatePicker } from '../utils/BasicDatePicker';
+import { ComboBox } from '../utils/ComboBox';
+import UseNumberInput from '../utils/UseNumberInput';
+import OutlinedButtons from '../utils/OutlinedButtons';
 
 const PageContainer = styled.div`
   display: flex;
@@ -21,6 +24,50 @@ const BoxForm = styled.div`
   padding: 2rem;
   margin-top: 1rem;
 `;
+
+const states = [
+  {
+      "name": "Alabama",
+      "abbreviation": "AL"
+  },
+  {
+      "name": "Alaska",
+      "abbreviation": "AK"
+  },
+  {
+      "name": "American Samoa",
+      "abbreviation": "AS"
+  },
+  {
+      "name": "Arizona",
+      "abbreviation": "AZ"
+  },
+  {
+      "name": "Wyoming",
+      "abbreviation": "WY"
+  }
+];
+
+const department = [
+  {
+      "name": "Sales",
+  },
+  {
+      "name": "Marketing",
+  },
+  {
+      "name": "Engineering",
+  },
+  {
+      "name": "Human Ressources",
+  },
+  {
+      "name": "Legal",
+  }
+];
+
+
+
 const Home = () => {
   return (
     <PageContainer>
@@ -35,7 +82,11 @@ const Home = () => {
           <h2>Adress</h2>
           <BasicTextFields label={"Street"}/>
           <BasicTextFields label={"City"}/>
+          <ComboBox data={states} label={"State"}/>
+          <UseNumberInput />
         </BoxForm>
+        <ComboBox data={department} label={"Department"}/>
+        <OutlinedButtons text={"Save"} />
       </Form>
     </PageContainer>
   );

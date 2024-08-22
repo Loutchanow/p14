@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { BasicTextFields } from '../utils/BasicTextFields';
 import { BasicDatePicker } from '../utils/BasicDatePicker';
 import { ComboBox } from '../utils/ComboBox';
-import UseNumberInput from '../utils/UseNumberInput';
-import OutlinedButtons from '../utils/OutlinedButtons';
+import { ModalUnstyled } from '../utils/ModalUnstyled';
+import { NumberInputBasic } from '../utils/NumberInputBasic';
 
 const PageContainer = styled.div`
   display: flex;
@@ -23,6 +23,7 @@ const BoxForm = styled.div`
   border: 1px solid white;
   padding: 2rem;
   margin-top: 1rem;
+  border-radius: 4px;
 `;
 
 const states = [
@@ -83,10 +84,10 @@ const Home = () => {
           <BasicTextFields label={"Street"}/>
           <BasicTextFields label={"City"}/>
           <ComboBox data={states} label={"State"}/>
-          <UseNumberInput />
+          <NumberInputBasic label='Zip Code' />
         </BoxForm>
         <ComboBox data={department} label={"Department"}/>
-        <OutlinedButtons text={"Save"} />
+        <ModalUnstyled text={"Employee created !"} label='Save'/>
       </Form>
     </PageContainer>
   );

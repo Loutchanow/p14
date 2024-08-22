@@ -12,7 +12,7 @@ export const ComboBox: React.FC<ComboBoxProps> = ({ data, label }: ComboBoxProps
       disablePortal
       options={data}
       getOptionLabel={(option) => option.name} 
-      sx={{ width: 267, marginTop: 1 }}
+      sx={{ width: 267, marginTop: 1.5 }}
       renderInput={(params) => <TextField {...params} label={label} />}
     />
   );

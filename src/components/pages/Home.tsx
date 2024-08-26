@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { BasicTextFields } from '../utils/BasicTextFields';
 import { BasicDatePicker } from '../utils/BasicDatePicker';
 import { ComboBox } from '../utils/ComboBox';
-import { ModalUnstyled } from '../utils/ModalUnstyled';
 import { NumberInputBasic } from '../utils/NumberInputBasic';
+import { ModalUnstyled } from '../utils/ModalUnstyled';
 
 const PageContainer = styled.div`
   display: flex;
@@ -52,18 +52,28 @@ const states = [
 const department = [
   {
       "name": "Sales",
+      "abbreviation": "AS"
+
   },
   {
       "name": "Marketing",
+      "abbreviation": "AS"
+
   },
   {
       "name": "Engineering",
+      "abbreviation": "AS"
+
   },
   {
       "name": "Human Ressources",
+      "abbreviation": "AS"
+
   },
   {
       "name": "Legal",
+      "abbreviation": "AS"
+
   }
 ];
 

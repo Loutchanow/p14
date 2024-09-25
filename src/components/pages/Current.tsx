@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
-import DataTable from "../utils/DataTable";
 import { RootState } from '../../store';
+import { Data } from "../métiers/Data";
+
+
+
 
 
 const Current = () => {
-  const user = useSelector((state: RootState) => state.users.users);
-  console.log(user);
+  const users = useSelector((state: RootState) => state.users.users);
+  console.log(users);
   
   return (
     <div>
-      current
-      <DataTable />
+      <Data data={users} />
     </div>
   );
 };

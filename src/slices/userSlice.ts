@@ -1,51 +1,66 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface AuthState {
-  user: {
-    firstName: string | null;
-    lastName: string | null;
-    startDate: string | null;
-    department: string | null;
-    birth: string | null;
-    street: string | null;
-    city: string | null;
-    state: string | null;
-    zipCode: number | null;
-  } | null;
+interface User {
+  firstName: string | null;
+  lastName: string | null;
+  startDate: string | null;
+  department: string | null;
+  birth: string | null;
+  street: string | null;
+  city: string | null;
+  state: string | null;
+  zipCode: number | null;
 }
 
-const initialState: AuthState = {
-  user: {
+interface UserState {        
+  currentUser: User | null;  
+  users: User[];          
+}
+
+const initialState: UserState = {
+  currentUser: {
     firstName: null,
     lastName: null,
-    startDate: null,
-    department: null,
     birth: null,
+    startDate: null,
     street: null,
     city: null,
     state: null,
     zipCode: null,
-}
-}
+    department: null,
+  },
+  users: [], 
+};
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    createUser: (state, action: PayloadAction<{ user: { firstName: string; lastName: string; startDate: string; department: string; birth: string; street: string; city: string; state: string; zipCode: number} }>) => {
-      state.user = {
-        firstName: action.payload.user.firstName,
-        lastName: action.payload.user.lastName,
-        startDate: action.payload.user.startDate,
-        department: action.payload.user.department,
-        birth: action.payload.user.birth,
-        street: action.payload.user.street,
-        city: action.payload.user.city,
-        state: action.payload.user.state,
-        zipCode: action.payload.user.zipCode,
-      };
+
+    editUser: (state, action: PayloadAction<{ field: keyof User; value: string | number | null }>) => {
+      if (state.currentUser) {
+        state.currentUser[action.payload.field] = action.payload.value;
+      }
+    },
+    
+    saveUser: (state) => {
+      if (state.currentUser) {
+        state.users.push(state.currentUser);  
+        state.currentUser = {
+          firstName: null,
+          lastName: null,
+          birth: null,
+          startDate: null,
+          street: null,
+          city: null,
+          state: null,
+          zipCode: null,
+          department: null,
+        };
+      }
     },
   },
 });
 
-export const { createUser } = userSlice.actions;
+export const { editUser, saveUser } = userSlice.actions;
 export default userSlice.reducer;

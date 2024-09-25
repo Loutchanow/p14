@@ -2,6 +2,8 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
+import { useDispatch } from 'react-redux';
+import { saveUser } from '../../slices/userSlice';
 
 interface ModalUnstyledProps {
   text: string;
@@ -12,7 +14,8 @@ interface ModalUnstyledProps {
 export const ModalUnstyled: React.FC<ModalUnstyledProps>=({text, label}: ModalUnstyledProps)=> {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true)
-  console.log("saved");
+  const dispatch = useDispatch();
+  dispatch(saveUser());
   ;
   const handleClose = () => setOpen(false);
 

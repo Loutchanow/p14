@@ -3,9 +3,11 @@ import TextField from '@mui/material/TextField';
 
 interface LabelProps {
   label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
 }
 
-export const BasicTextFields: React.FC<LabelProps> = ({label}: LabelProps) => {
+export const BasicTextFields: React.FC<LabelProps> = ({label, onChange}: LabelProps) => {
+  
   return (
     <Box
       component="form"
@@ -15,7 +17,7 @@ export const BasicTextFields: React.FC<LabelProps> = ({label}: LabelProps) => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label={label} variant="outlined" />
+      <TextField id="outlined-basic" label={label} variant="outlined" onBlur={(e: React.FocusEvent<HTMLInputElement>) => onChange(e)} />
 
     </Box>
   );

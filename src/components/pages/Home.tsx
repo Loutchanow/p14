@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { BasicTextFields } from '../utils/BasicTextFields';
 import { BasicDatePicker } from '../utils/BasicDatePicker';
 import { ComboBox } from '../utils/ComboBox';
-import { NumberInputBasic } from '../utils/NumberInputBasic';
 import { ModalUnstyled } from '../utils/ModalUnstyled';
+import { useDispatch } from 'react-redux';
+import { editUser } from '../../slices/userSlice';
+import NumberInputIntroduction from '../utils/NumberInputIntroduction';
 
 const PageContainer = styled.div`
   display: flex;
@@ -80,27 +82,32 @@ const department = [
 
 
 const Home = () => {
-  return (
-    <PageContainer>
+  const dispatch = useDispatch();
 
-      <h1>Create Employee</h1>
-      <Form>
-        <BasicTextFields label={"First Name"}/>
-        <BasicTextFields label={"Last Name"}/>
-        <BasicDatePicker label={"Date of Birth"} />
-        <BasicDatePicker label={"Start date"} />
-        <BoxForm>
-          <h2>Adress</h2>
-          <BasicTextFields label={"Street"}/>
-          <BasicTextFields label={"City"}/>
-          <ComboBox data={states} label={"State"}/>
-          <NumberInputBasic label='Zip Code' />
-        </BoxForm>
-        <ComboBox data={department} label={"Department"}/>
-        <ModalUnstyled text={"Employee created !"} label='Save'/>
-      </Form>
-    </PageContainer>
-  );
-};
+  const handleInputChange = (field: keyof User, value: string | number | null) => {
+    dispatch(editUser({ field, value }));
+  };
 
+
+return (
+  <PageContainer>
+    <h1>Create Employee</h1>
+    <Form>
+      <BasicTextFields label={"First Name"} onChange={(e) => handleInputChange('firstName', e.target.value)} />
+      <BasicTextFields label={"Last Name"} onChange={(e) => handleInputChange('lastName', e.target.value)} />
+      <BasicDatePicker label="Date of Birth" onChange={(date) => handleInputChange('birth', date ? date.format('YYYY-MM-DD') : null)} />
+      <BasicDatePicker label="Start Date" onChange={(date) => handleInputChange('startDate', date ? date.format('YYYY-MM-DD') : null)} />
+      <BoxForm>
+        <h2>Address</h2>
+        <BasicTextFields label={"Street"} onChange={(e) => handleInputChange('street', e.target.value)} />
+        <BasicTextFields label={"City"} onChange={(e) => handleInputChange('city', e.target.value)} />
+        <ComboBox data={states} label={"State"} onChange={(event, newValue) => handleInputChange('state', newValue ? newValue.name : null)} />
+        <NumberInputIntroduction label="Zip Code" onChange={(e) => handleInputChange('zipCode', parseInt(e.target.value))} />
+      </BoxForm>
+      <ComboBox data={department} label={"Department"} onChange={(event, newValue) => handleInputChange('department', newValue ? newValue.name : null)} />
+      <ModalUnstyled text={"Employee created !"} label="Save" />
+    </Form>
+  </PageContainer>
+);
+}
 export default Home;

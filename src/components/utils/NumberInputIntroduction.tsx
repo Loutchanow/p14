@@ -6,7 +6,7 @@ import {
 } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
 
-const NumberInput = React.forwardRef(function CustomNumberInput(
+const CustomNumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
@@ -32,22 +32,9 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   );
 });
 
-interface NumberInputBasicProps {
-  label: string;
-}
-export const NumberInputBasic: React.FC<NumberInputBasicProps> =({label}: NumberInputBasicProps) => {
-
-
-
-
-  const [value, setValue] = React.useState<number | null>(null);
+export default function NumberInputIntroduction({ label, onChange }: { label: string; onChange: (event: React.FocusEvent<HTMLDivElement>) => void }) {
   return (
-    <NumberInput
-      aria-label="Demo number input"
-      placeholder={label}
-      value={value}
-      onChange={(event, val) => setValue(val)}
-    />
+    <CustomNumberInput aria-label="Demo number input" placeholder={label} onBlur={(event: React.FocusEvent<HTMLDivElement>) => onChange(event)} />
   );
 }
 

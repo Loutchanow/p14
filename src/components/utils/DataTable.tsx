@@ -1,6 +1,6 @@
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 
-export default function DataTable({data, columns, rows}) {
+export default function DataTable({ columns, rows}) {
   
   return (
     <div style={{ height: 400, width: '100%' }}>

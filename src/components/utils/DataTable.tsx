@@ -1,7 +1,11 @@
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 
-export default function DataTable({ columns, rows}) {
-  
+interface DataTableProps {
+  columns: GridColDef[];  
+  rows: GridRowsProp;     
+}
+
+export default function DataTable({ columns, rows }: DataTableProps) {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid

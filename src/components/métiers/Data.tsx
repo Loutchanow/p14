@@ -40,7 +40,7 @@ const columns = [
   },
   {
     field: 'zipCode',
-    headerName: 'Zid Code',
+    headerName: 'Zip Code',
     type: 'number',
     width: 100,
   },
@@ -66,7 +66,6 @@ export const Data: React.FC<DataProps> = ({ data }: DataProps) => {
 
   const dataWithId = getIdAndFilter(data);
   
-  console.log(dataWithId); 
 
   return (
     <DataTable 

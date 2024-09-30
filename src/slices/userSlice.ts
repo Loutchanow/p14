@@ -14,6 +14,7 @@ interface User {
 
 interface UserState {        
   currentUser: User | null;  
+  readyToSave: boolean; 
   users: User[];          
 }
 
@@ -29,34 +30,32 @@ const initialState: UserState = {
     zipCode: null,
     department: null,
   },
+  readyToSave: false,
   users: [], 
 };
+
+
+const isUserComplete = (user: User | null): boolean => {
+  if (!user) return false;
+  return Object.values(user).every(value => value !== null && value !== '');
+};
+
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-
     editUser: (state, action: PayloadAction<{ field: keyof User; value: string | number | null }>) => {
       if (state.currentUser) {
         state.currentUser[action.payload.field] = action.payload.value;
+        state.readyToSave = isUserComplete(state.currentUser);
       }
     },
     
     saveUser: (state) => {
-      if (state.currentUser) {
+      if (state.currentUser && state.readyToSave) {
         state.users.push(state.currentUser);  
-        state.currentUser = {
-          firstName: null,
-          lastName: null,
-          birth: null,
-          startDate: null,
-          street: null,
-          city: null,
-          state: null,
-          zipCode: null,
-          department: null,
-        };
+        state.readyToSave = false;
       }
     },
   },
@@ -64,3 +63,4 @@ const userSlice = createSlice({
 
 export const { editUser, saveUser } = userSlice.actions;
 export default userSlice.reducer;
+// Styled Components

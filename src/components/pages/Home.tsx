@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { BasicTextFields } from '../utils/BasicTextFields';
 import { BasicDatePicker } from '../utils/BasicDatePicker';
 import { ComboBox } from '../utils/ComboBox';
-import { ModalUnstyled } from '../utils/ModalUnstyled';
 import { useDispatch } from 'react-redux';
 import { editUser } from '../../slices/userSlice';
 import NumberInputIntroduction from '../utils/NumberInputIntroduction';
+import UnstyledButtonsSimple from '../utils/UnstyledButtonsSimple';
 
 const PageContainer = styled.div`
   display: flex;
@@ -105,7 +105,7 @@ return (
         <NumberInputIntroduction label="Zip Code" onChange={(e) => handleInputChange('zipCode', parseInt(e.target.value))} />
       </BoxForm>
       <ComboBox data={department} label={"Department"} onChange={(event, newValue) => handleInputChange('department', newValue ? newValue.name : null)} />
-      <ModalUnstyled text={"Employee created !"} label="Save" />
+        <UnstyledButtonsSimple />
     </Form>
   </PageContainer>
 );

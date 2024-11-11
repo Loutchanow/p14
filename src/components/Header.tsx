@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { LinkProps } from 'react-router-dom';
 
 interface StyledLinkProps extends LinkProps {
-  isActive?: boolean;
+  $isActive?: boolean;
 }
 
 const Nav = styled.nav`
@@ -17,7 +17,7 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
   font-size: 20px;
   cursor: pointer;
   margin-left: 2rem;
-  text-decoration: ${(props) => (props.isActive ? 'underline' : '')};
+  text-decoration: ${(props) => (props.$isActive ? 'underline' : '')};
 `;
 
 function Header() {
@@ -32,14 +32,14 @@ function Header() {
     <Nav>
       <StyledLink
         to="/"
-        isActive={activeTab === '/'}
+        $isActive={activeTab === '/' }
         onClick={() => setActiveTab('/')}
       >
         Home
       </StyledLink>
       <StyledLink
         to="/current"
-        isActive={activeTab === '/current'}
+        $isActive={activeTab === '/current'}
         onClick={() => setActiveTab('/current')}
       >
         Current Employees

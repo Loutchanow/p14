@@ -5,12 +5,14 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { saveUser } from '../../slices/userSlice';
 import { useState } from 'react';
-import Modal from './Modal';
+import { Modale } from '@loutchano/modale-package';
+import { useNavigate } from 'react-router-dom';
 
 export default function UnstyledButtonsSimple() {
 
   const ready = useSelector((state: RootState) => state.users.readyToSave);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleSave = () => {
@@ -19,7 +21,9 @@ export default function UnstyledButtonsSimple() {
       setModalOpen(true); 
     }
   };
-
+  const actionTwo = () => {
+    navigate('/current'); 
+  };
   const handleCloseModal = () => {
     setModalOpen(false); 
   };
@@ -29,7 +33,8 @@ export default function UnstyledButtonsSimple() {
     <Stack spacing={2} direction="row" margin={1}>
       <StyledButton disabled={!ready}  onClick={handleSave}>Save</StyledButton>
     </Stack>
-     <Modal open={modalOpen} handleClose={handleCloseModal} />
+    <Modale open={modalOpen} message={"Le message"} title={"Titre"} actionButtonOne={handleCloseModal} actionButtonTwo={actionTwo} bordercolor='white' backgroundcolor='black' textcolor='white' labelButtonOne='Fermer' labelButtonTwo={"Voir"} />
+
     </>
   );
 }

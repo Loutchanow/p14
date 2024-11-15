@@ -51,6 +51,12 @@ const userSlice = createSlice({
         state.readyToSave = isUserComplete(state.currentUser);
       }
     },
+    clearCurrentUser: (state) => {
+      if (state.currentUser) {
+        state.currentUser = { ...initialState.currentUser };
+        state.readyToSave = false; 
+      }
+    },
     
     saveUser: (state) => {
       if (state.currentUser && state.readyToSave) {
@@ -61,6 +67,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { editUser, saveUser } = userSlice.actions;
+export const { editUser, saveUser, clearCurrentUser } = userSlice.actions;
 export default userSlice.reducer;
 // Styled Components

@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import Stack from '@mui/material/Stack';
 import {  useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { saveUser } from '../../slices/userSlice';
+import { saveUser, clearCurrentUser } from '../../slices/userSlice';
 import { useState } from 'react';
 import { Modale } from '@loutchano/modale-package';
 import { useNavigate } from 'react-router-dom';
@@ -15,28 +15,43 @@ export default function UnstyledButtonsSimple() {
   const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
+
   const handleSave = () => {
     if (ready) {
       dispatch(saveUser());
-      setModalOpen(true); 
+      setModalOpen(true);
     }
   };
+  
   const actionTwo = () => {
-    navigate('/current'); 
-  };
-  const handleCloseModal = () => {
+    navigate('/current');
+    dispatch(clearCurrentUser());
     setModalOpen(false); 
   };
-
+  
   return (
     <>
-    <Stack spacing={2} direction="row" margin={1}>
-      <StyledButton disabled={!ready}  onClick={handleSave}>Save</StyledButton>
-    </Stack>
-    <Modale open={modalOpen} message={"Le message"} title={"Titre"} actionButtonOne={handleCloseModal} actionButtonTwo={actionTwo} bordercolor='white' backgroundcolor='black' textcolor='white' labelButtonOne='Fermer' labelButtonTwo={"Voir"} />
-
+      <Stack spacing={2} direction="row" margin={1}>
+        <StyledButton disabled={!ready} onClick={handleSave}>
+          Save
+        </StyledButton>
+      </Stack>
+      <Modale
+        open={modalOpen}
+        onClose={() => setModalOpen(false)} 
+        message="Utilisateur créé avec succès."
+        title="Confirmation"
+        actionButtonOne={() => setModalOpen(false)} 
+        actionButtonTwo={actionTwo} 
+        bordercolor="white"
+        backgroundcolor="black"
+        textcolor="white"
+        labelButtonOne="Continuer"
+        labelButtonTwo="Voir"
+      />
     </>
   );
+  
 }
 
 const blue = {

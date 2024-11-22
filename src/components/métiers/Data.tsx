@@ -2,7 +2,7 @@
 import DataTable from '../utils/DataTable';
 
 interface DataProps {
-  data: Array<any>;
+  data: Array<{ [key: string]: string | number}>;
 }
 
 
@@ -49,11 +49,11 @@ const columns = [
 
 
 interface DataProps {
-  data: Array<{ [key: string]: any }>;
+  data: Array<{ [key: string]: string | number}>;
 }
 
 export const Data: React.FC<DataProps> = ({ data }: DataProps) => {
-  const getIdAndFilter = (data: Array<{ [key: string]: any }>) => {
+  const getIdAndFilter = (data: Array<{ [key: string]: string | number }>) => {
     return data
       .filter((item) => {
         return Object.values(item).every(value => value !== null && value !== undefined);
